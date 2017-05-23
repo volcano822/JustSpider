@@ -1,54 +1,25 @@
-Yii 2 Advanced Project Template
-===============================
-
-Yii 2 Advanced Project Template is a skeleton [Yii 2](http://www.yiiframework.com/) application best for
-developing complex Web applications with multiple tiers.
-
-The template includes three tiers: front end, back end, and console, each of which
-is a separate Yii application.
-
-The template is designed to work in a team development environment. It supports
-deploying the application in different environments.
-
-Documentation is at [docs/guide/README.md](docs/guide/README.md).
-
-[![Latest Stable Version](https://poser.pugx.org/yiisoft/yii2-app-advanced/v/stable.png)](https://packagist.org/packages/yiisoft/yii2-app-advanced)
-[![Total Downloads](https://poser.pugx.org/yiisoft/yii2-app-advanced/downloads.png)](https://packagist.org/packages/yiisoft/yii2-app-advanced)
-[![Build Status](https://travis-ci.org/yiisoft/yii2-app-advanced.svg?branch=master)](https://travis-ci.org/yiisoft/yii2-app-advanced)
-
-DIRECTORY STRUCTURE
--------------------
-
-```
-common
-    config/              contains shared configurations
-    mail/                contains view files for e-mails
-    models/              contains model classes used in both backend and frontend
-console
-    config/              contains console configurations
-    controllers/         contains console controllers (commands)
-    migrations/          contains database migrations
-    models/              contains console-specific model classes
-    runtime/             contains files generated during runtime
-backend
-    assets/              contains application assets such as JavaScript and CSS
-    config/              contains backend configurations
-    controllers/         contains Web controller classes
-    models/              contains backend-specific model classes
-    runtime/             contains files generated during runtime
-    views/               contains view files for the Web application
-    web/                 contains the entry script and Web resources
-frontend
-    assets/              contains application assets such as JavaScript and CSS
-    config/              contains frontend configurations
-    controllers/         contains Web controller classes
-    models/              contains frontend-specific model classes
-    runtime/             contains files generated during runtime
-    views/               contains view files for the Web application
-    web/                 contains the entry script and Web resources
-    widgets/             contains frontend widgets
-vendor/                  contains dependent 3rd-party packages
-environments/            contains environment-based overrides
-tests                    contains various tests for the advanced application
-    codeception/         contains tests developed with Codeception PHP Testing Framework
-```
+--------------------------------------
+***股票&&北京二手房成交（链家）的数据抓取****
+--------------------------------------
+抓取脚本，积攒了所有的历史股价信息 && 二手房成交信息
+#股票列表[更新]
+0 10,12,20,22  * * * cd /home/work/newTools/hxf && /home/work/odp/bin/php yii stock/init-list 2>&1 1>>ct.log
+#股票今日
+5 17 * * * cd /home/work/newTools/hxf && /home/work/odp/bin/php yii stock/spider-today-stock-info 2>&1 1>>ct.log
+#新股
+40 9-10 * * * cd /home/work/newTools/hxf && /home/work/odp/bin/php yii stock/spider-new-stock 2>&1 1>>ct.log
+#链家成交信息
+0 10 * * * cd /home/work/newTools/hxf && /home/work/odp/bin/php yii house/spider-lj 2>&1 1>>ct.log
+0 9 * * *  cd /home/work/newTools/hxf && /home/work/odp/bin/php yii house/spider-lj-village-data 2>&1 1>>ct.log
+--------------------------------------
+console/controllers
+    HouseController.php
+        actionSpiderLj 抓取每日链家成交数据
+        actionSpiderLjVillageData 抓取链家小区数据
+        actionSpiderLjVillage 抓取小区成交数据
+    StockController.php
+        actionInitList 初始化股票列表
+        actionInitHistory 初始化历史股价数据
+        actionSpiderTodayStockInfo 抓取今日股价数据
+        actionSpiderNewStock 抓取今日新股
+--------------------------------------
